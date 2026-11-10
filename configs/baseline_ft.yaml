@@ -1,0 +1,15 @@
+# Fine-tune on COCO captions WITHOUT hard negatives (isolates effect of fine-tuning itself)
+name: baseline_ft
+model: openai/clip-vit-base-patch32
+negatives_file: data/negatives.jsonl
+image_dir: data/coco_subset/images      # files named {image_id:012d}.jpg
+use_negatives: false
+neg_types: null
+max_samples: 50000
+epochs: 3
+batch_size: 128
+lr: 5.0e-6
+weight_decay: 0.1
+warmup_steps: 200
+num_workers: 2
+fp16: true

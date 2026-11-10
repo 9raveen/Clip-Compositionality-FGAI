@@ -1,0 +1,13 @@
+torch>=2.1
+torchvision
+transformers>=4.40,<5
+datasets>=2.18
+huggingface_hub
+pillow
+numpy
+pandas
+matplotlib
+pyyaml
+tqdm
+spacy>=3.7
+scikit-learn
