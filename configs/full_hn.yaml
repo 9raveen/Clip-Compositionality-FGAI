@@ -1,0 +1,6 @@
+# optional: full fine-tuning variant (needs a much smaller lr)
+base: _base.yaml
+name: full_hn
+tune: {mode: full}
+lr: 5.0e-6
+weight_decay: 0.1

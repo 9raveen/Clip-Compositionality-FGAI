@@ -1,0 +1,4 @@
+# ablation: attribute negatives only
+base: _base.yaml
+name: lora_hn_attr
+neg_types: [attr_replace, attr_swap]

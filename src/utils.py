@@ -1,43 +1,49 @@
-import os, random
+import copy, os, random, subprocess
 import numpy as np
 import torch
 import yaml
 
 
 def set_seed(seed: int):
-    random.seed(seed)
-    np.random.seed(seed)
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
+    random.seed(seed); np.random.seed(seed)
+    torch.manual_seed(seed); torch.cuda.manual_seed_all(seed)
+
+
+def _merge(base, over):
+    out = copy.deepcopy(base)
+    for k, v in over.items():
+        out[k] = _merge(out[k], v) if isinstance(v, dict) and isinstance(out.get(k), dict) else v
+    return out
 
 
 def load_config(path: str) -> dict:
+    """YAML with optional `base: other.yaml` inheritance (deep-merged), so ablations only list differences."""
     with open(path) as f:
-        return yaml.safe_load(f)
+        cfg = yaml.safe_load(f)
+    if "base" in cfg:
+        base = load_config(os.path.join(os.path.dirname(path), cfg.pop("base")))
+        cfg = _merge(base, cfg)
+    return cfg
 
 
-def save_ckpt(path, model, optimizer, scheduler, scaler, epoch):
+def git_hash():
+    try:
+        return subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], stderr=subprocess.DEVNULL).decode().strip()
+    except Exception:
+        return None
+
+
+def save_ckpt(path, state):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     tmp = path + ".tmp"
-    torch.save({
-        "model": model.state_dict(),
-        "optimizer": optimizer.state_dict(),
-        "scheduler": scheduler.state_dict(),
-        "scaler": scaler.state_dict() if scaler is not None else None,
-        "epoch": epoch,
-    }, tmp)
-    os.replace(tmp, path)  # atomic: a crash mid-save cannot corrupt the checkpoint
+    torch.save(state, tmp)
+    os.replace(tmp, path)          # atomic: a crash mid-save cannot corrupt the checkpoint
 
 
-def load_ckpt_if_exists(path, model, optimizer, scheduler, scaler, device):
-    """Returns the epoch to start from (0 if no checkpoint)."""
-    if not os.path.exists(path):
-        return 0
-    ck = torch.load(path, map_location=device)
-    model.load_state_dict(ck["model"])
-    optimizer.load_state_dict(ck["optimizer"])
-    scheduler.load_state_dict(ck["scheduler"])
-    if scaler is not None and ck.get("scaler") is not None:
-        scaler.load_state_dict(ck["scaler"])
-    print(f"[resume] loaded {path}, continuing from epoch {ck['epoch'] + 1}")
-    return ck["epoch"] + 1
+def load_trainable(model, state_dict):
+    """Copy saved trainable tensors (adapters or full weights) into the model."""
+    params = dict(model.named_parameters())
+    missing = [n for n in state_dict if n not in params]
+    assert not missing, f"checkpoint keys not in model: {missing[:3]}"
+    for n, v in state_dict.items():
+        params[n].data.copy_(v)

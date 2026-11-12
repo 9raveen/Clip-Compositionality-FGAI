@@ -1,0 +1,5 @@
+# optional: LoRA on the text tower only
+base: _base.yaml
+name: lora_hn_textonly
+tune:
+  lora: {towers: text}

@@ -1,0 +1,20 @@
+model: openai/clip-vit-base-patch32
+train_jsonl: data/negatives_train.jsonl
+val_jsonl: data/negatives_val.jsonl
+test_jsonl: data/captions_test.jsonl
+image_dir: data/coco_subset/images
+tune:
+  mode: lora
+  lora: {r: 16, alpha: 32, dropout: 0.05, towers: both}   # q_proj and v_proj in both encoders
+lambda_hn: 1.0
+hn_loss: ce            # ce | margin
+margin: 0.1
+neg_types: null        # null = all five types
+epochs: 10
+batch_size: 128
+lr: 1.0e-4
+weight_decay: 0.01
+warmup_steps: 20
+num_workers: 2
+fp16: true
+wino_every: 5          # monitoring only

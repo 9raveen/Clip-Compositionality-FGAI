@@ -9,3 +9,4 @@ outputs/
 data/*
 !data/.gitkeep
 .env
+!data/splits.json

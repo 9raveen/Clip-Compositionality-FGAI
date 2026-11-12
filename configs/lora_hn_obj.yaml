@@ -1,0 +1,4 @@
+# ablation: object negatives only
+base: _base.yaml
+name: lora_hn_obj
+neg_types: [obj_replace]
