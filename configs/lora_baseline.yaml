@@ -1,0 +1,4 @@
+# B: standard fine-tuning baseline = same LoRA, same data, lambda = 0 (positives only)
+base: _base.yaml
+name: lora_baseline
+lambda_hn: 0.0

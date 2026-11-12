@@ -1,0 +1,3 @@
+base: _base.yaml
+name: lora_hn_lam2
+lambda_hn: 2.0

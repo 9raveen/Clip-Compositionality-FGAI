@@ -1,0 +1,4 @@
+# ablation: relation negatives only
+base: _base.yaml
+name: lora_hn_rel
+neg_types: [rel_replace, obj_swap]
