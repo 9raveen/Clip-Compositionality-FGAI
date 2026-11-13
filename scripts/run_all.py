@@ -8,7 +8,7 @@ import argparse, os, subprocess, sys
 
 TIERS = {
     "main": (["lora_baseline", "lora_hn"], [0, 1, 2]),
-    "ablation": (["lora_hn_attr", "lora_hn_obj", "lora_hn_rel", "lora_hn_lam05", "lora_hn_lam2"], [0]),
+    "ablation": (["lora_hn_attr", "lora_hn_obj", "lora_hn_rel", "lora_hn_swaps", "lora_hn_lam05", "lora_hn_lam2"], [0]),
     "optional": (["full_hn", "lora_hn_textonly"], [0]),
 }
 ap = argparse.ArgumentParser()
