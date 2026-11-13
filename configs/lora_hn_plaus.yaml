@@ -1,0 +1,5 @@
+# likelihood-matched negatives (text-only shortcuts removed)
+base: _base.yaml
+name: lora_hn_plaus
+train_jsonl: data/negatives_train_plaus.jsonl
+val_jsonl: data/negatives_val_plaus.jsonl

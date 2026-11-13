@@ -1,4 +1,0 @@
-# control: word-preserving negatives only (no lexical shortcut possible)
-base: _base.yaml
-name: lora_hn_swaps
-neg_types: [obj_swap, attr_swap]

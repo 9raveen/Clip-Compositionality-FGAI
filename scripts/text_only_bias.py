@@ -18,6 +18,7 @@ ap.add_argument("--per_type", type=int, default=500, help="pairs sampled per typ
 ap.add_argument("--min_count", type=int, default=30)
 ap.add_argument("--top", type=int, default=6)
 ap.add_argument("--seed", type=int, default=0)
+ap.add_argument("--val", default=None, help="val negatives file: enables the learned bag-of-ngrams detector")
 args = ap.parse_args()
 
 pairs = defaultdict(list)
@@ -65,3 +66,26 @@ if args.lm:
         sp, sn = score([c for c, _ in sub]), score([n for _, n in sub])
         acc = sum(b < a for a, b in zip(sp, sn)) / len(sub)
         print(f"{t:13s} text_only_acc = {acc:.1%}  (n={len(sub)}, 50% = not separable)")
+
+
+if args.val:
+    # 3. an independent learned detector (not GPT-2): trained on train pairs, tested on val pairs.
+    #    Features are unigram+bigram counts; the model scores which of two captions is the negative.
+    import numpy as np
+    import scipy.sparse as sp
+    from sklearn.feature_extraction.text import CountVectorizer
+    from sklearn.linear_model import LogisticRegression
+    vpairs = defaultdict(list)
+    for line in open(args.val):
+        r = json.loads(line)
+        for n in r["negatives"]:
+            vpairs[n["type"]].append((r["caption"], n["text"]))
+    allp = [p for ps in pairs.values() for p in ps]
+    vec = CountVectorizer(ngram_range=(1, 2), min_df=3).fit([c for c, _ in allp] + [n for _, n in allp])
+    diff = lambda ps: vec.transform([n for _, n in ps]) - vec.transform([c for c, _ in ps])
+    X = diff(allp)
+    clf = LogisticRegression(max_iter=2000, fit_intercept=False).fit(sp.vstack([X, -X]), np.r_[np.ones(X.shape[0]), np.zeros(X.shape[0])])
+    print("\n=== 3. learned text-only detector (unigram+bigram), trained on train, tested on val ===")
+    for t, ps in sorted(vpairs.items()):
+        acc = float((diff(ps) @ clf.coef_[0] > 0).mean())
+        print(f"{t:13s} detector_acc = {acc:.1%}  (n={len(ps)}, 50% = not separable)")
