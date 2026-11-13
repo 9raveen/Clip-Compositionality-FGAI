@@ -54,6 +54,21 @@ REL_TOKEN = {"on": "under", "under": "on", "above": "below", "below": "above", "
 SWAP_PREPS = {"on", "under", "above", "below", "over", "behind", "inside", "outside", "atop"}
 # if any of these lies between the swapped phrases the relation may be symmetric -> swap could be TRUE
 SYMMETRIC = {"beside", "near", "by", "with", "and", "between", "next", "together", "each", "other", "across", "around"}
+COLOR_WORDS = set(COLORS) | {"grey", "silver", "gold", "golden", "tan", "beige"}
+SIZE_WORDS = {"big", "small", "large", "little", "tall", "short", "long", "tiny", "huge"}
+
+
+def attr_cat(w):
+    """Attribute category used to keep attr_swap between comparable attributes (color<->color, ...)."""
+    if w in COLOR_WORDS:
+        return "color"
+    if w in SIZE_WORDS:
+        return "size"
+    if w in MATERIALS:
+        return "material"
+    return None
+
+
 PERSON_COUNTERPART = {"man": "woman", "woman": "man", "boy": "girl", "girl": "boy"}   # same age class only
 ARTICLES = {"a", "an", "the"}
 
@@ -106,7 +121,15 @@ def replace_span(text, start, end, new):
 
 
 # ---------- candidate generators: each returns a list of (new_text, between_text) ----------
-def obj_swap(doc, text, chunks):
+def agreement_ok(doc, ca, cb):
+    """A swap between a singular and a plural phrase breaks verb agreement ("Carrots is slicing ..."),
+    which would be a grammaticality shortcut, so reject it when the sentence has a finite verb."""
+    if (ca.root.tag_ in ("NNS", "NNPS")) == (cb.root.tag_ in ("NNS", "NNPS")):
+        return True
+    return not any(t.tag_ in ("VBZ", "VBP") or t.lower_ in {"is", "are", "was", "were"} for t in doc)
+
+
+def obj_swap(doc, text, chunks, rejected=None):
     out = []
     for tok in doc:
         pair = None
@@ -130,6 +153,10 @@ def obj_swap(doc, text, chunks):
                 pair = (_noun_chunk(chunks, subj), _noun_chunk(chunks, obj))
         if pair and pair[0] is not None and pair[1] is not None \
                 and pair[0].root.lower_ != pair[1].root.lower_:       # same head noun -> swap is a no-op
+            if not agreement_ok(doc, *pair):
+                if rejected is not None:
+                    rejected[("obj_swap", "agreement_mismatch")] += 1
+                continue
             res = swap_spans(text, *pair)
             if res:
                 out.append(res)
@@ -145,6 +172,8 @@ def attr_swap(doc, text, chunks):
     out = []
     for i in range(len(items) - 1):
         (a, ca), (b, cb) = items[i], items[i + 1]
+        if attr_cat(a.lower_) is None or attr_cat(a.lower_) != attr_cat(b.lower_):
+            continue                                                  # only swap comparable attributes
         if a.lower_ != b.lower_ and ca.root.lower_ != cb.root.lower_:  # same noun -> swap would be TRUE
             res = swap_spans(text, doc[a.i:a.i + 1], doc[b.i:b.i + 1])
             if res:
@@ -210,6 +239,8 @@ def validate(caption, neg, typ, between=""):
             return "reciprocal"
     if typ == "obj_swap" and any(w in SYMMETRIC for w in re.findall(r"[a-z]+", between.lower())):
         return "symmetric_relation"
+    if typ == "obj_swap" and len(caption.split()) > 16:
+        return "too_complex"                     # parser errors are common on long captions
     if len(neg.split()) > 40:
         return "too_long"
     return None
@@ -217,7 +248,7 @@ def validate(caption, neg, typ, between=""):
 
 def make_negatives(doc, text, rng, rejected=None):
     chunks = list(doc.noun_chunks)
-    raw = {"obj_swap": obj_swap(doc, text, chunks), "attr_swap": attr_swap(doc, text, chunks),
+    raw = {"obj_swap": obj_swap(doc, text, chunks, rejected), "attr_swap": attr_swap(doc, text, chunks),
            "rel_replace": rel_replace(doc, text, rng), "attr_replace": attr_replace(doc, text, rng),
            "obj_replace": obj_replace(doc, text, rng)}
     result, seen = [], {norm(text)}
