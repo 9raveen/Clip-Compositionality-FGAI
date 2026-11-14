@@ -31,17 +31,19 @@ def load(results_dir):
     return runs, zs
 
 
-def ms(v, scale=100.0):
+def ms(v, scale=100.0, dec=1):
     v = np.asarray(v, float) * scale
-    return f"{v.mean():.1f} ± {v.std(ddof=1):.1f}" if len(v) > 1 else f"{v.mean():.1f}"
+    return f"{v.mean():.{dec}f} ± {v.std(ddof=1):.{dec}f}" if len(v) > 1 else f"{v.mean():.{dec}f}"
 
 
-def paired_bootstrap(ref, test, metric, n_boot=10000, seed=0):
+def paired_bootstrap(ref, test, metric, n_boot=10000, seed=0, mask=None):
     seeds = sorted(set(ref) & set(test))
     if not seeds:
         return None
     d = np.array([np.asarray(test[s]["winoground"]["per_example"][metric], float)
                   - np.asarray(ref[s]["winoground"]["per_example"][metric], float) for s in seeds])
+    if mask is not None:                       # restrict to a subset of examples (e.g. one Winoground tag)
+        d = d[:, np.asarray(mask)]
     D, N = d.mean(0), d.shape[1]
     idx = np.random.default_rng(seed).integers(0, N, size=(n_boot, N))
     boots = D[idx].mean(1)
@@ -104,7 +106,7 @@ def main():
         t = lambda k: [r["retrieval"][k] for r in rs if "retrieval" in r]
         vc = [r["final_val"]["clip"] for r in rs if "final_val" in r]
         md.append(f"| {c} | {len(rs)} | {ms(w('text'))} | {ms(w('image'))} | {ms(w('group'))} | "
-                  + " | ".join(ms(t(k)) if t(k) else "-" for k in RET) + f" | {ms(vc, 1) if vc else '-'} |")
+                  + " | ".join(ms(t(k)) if t(k) else "-" for k in RET) + f" | {ms(vc, 1, 3) if vc else '-'} |")
         csv_rows.append({"config": c, "n_seeds": len(rs),
                          **{f"wino_{k}_mean": float(np.mean(w(k))) for k in W},
                          **{f"wino_{k}_std": float(np.std(w(k), ddof=1)) if len(rs) > 1 else "" for k in W},
@@ -139,13 +141,25 @@ def main():
                 md.append(f"| {ref} | {test} | {k} | {d.mean():+.2f} | {d.std(ddof=1) if len(d) > 1 else float('nan'):.2f} |")
 
     if args.tags:
-        tb = tag_breakdown(runs, load_tags())
+        tag_list = load_tags()
+        tb = tag_breakdown(runs, tag_list)
         tags = sorted({t for (_, t, _) in tb})
         md += ["", "## Winoground by tag (mean ± std over seeds, %)", "",
                "| config | " + " | ".join(f"{t} {k}" for t in tags for k in W) + " |", "|---|" + "---|" * (len(tags) * 3)]
         for c in sorted(runs):
             md.append(f"| {c} | " + " | ".join(ms(tb[(c, t, k)][0]) for t in tags for k in W) + " |")
         md.append("| n examples | " + " | ".join(str(tb[(sorted(runs)[0], t, k)][1]) for t in tags for k in W) + " |")
+        md += ["", "## Paired bootstrap by tag (diff = test − ref, pp). Tags with n < 30 are listed but must not be interpreted.", "",
+               "| ref | test | tag (n) | metric | seeds | diff | 95% CI | seed std of diff | verdict |", "|---|---|---|---|---|---|---|---|---|"]
+        tg = np.asarray(tag_list)
+        for ref, test in pairs:
+            if ref in runs and test in runs:
+                for t in tags:
+                    for k in W:
+                        b = paired_bootstrap(runs[ref], runs[test], k, args.n_boot, mask=(tg == t))
+                        if b:
+                            md.append(f"| {ref} | {test} | {t} ({int((tg == t).sum())}) | {k} | {b['n_seeds']} | {b['diff_pp']:+.2f} | "
+                                      f"[{b['ci_lo_pp']:+.2f}, {b['ci_hi_pp']:+.2f}] | {b['seed_std_pp']:.2f} | {b['verdict']} |")
 
     open(os.path.join(args.out_dir, "summary.md"), "w").write("\n".join(md) + "\n")
     for name, rws in (("summary.csv", csv_rows), ("summary_per_seed.csv", per_seed), ("bootstrap.csv", boot_rows)):
