@@ -1,7 +1,7 @@
 {
   "model": "openai/clip-vit-base-patch32",
   "ckpt": null,
-  "text": 0.3125,
+  "text": 0.31,
   "image": 0.1125,
   "group": 0.09,
   "per_example": {
@@ -184,7 +184,7 @@
       false,
       false,
       false,
-      true,
+      false,
       false,
       true,
       false,
@@ -1213,8 +1213,8 @@
     ]
   },
   "text_ci95": [
-    0.2675,
-    0.3575
+    0.265,
+    0.355
   ],
   "image_ci95": [
     0.0825,
