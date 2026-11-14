@@ -9,7 +9,9 @@ Statistics (fixed in advance):
     correctness difference (test - ref), average over the common seeds, resample the 400 examples 10,000 times.
     The CI therefore reflects example sampling only; seed spread is reported separately.
   * A difference is called real only if the 95% CI excludes 0 AND |mean diff| exceeds the std over seeds of the
-    per-seed mean difference (with a single common seed only the CI is used). Otherwise: "no detectable difference".
+    per-seed mean difference AND, when the reference has several seeds, every test seed lies beyond the whole
+    reference seed range (stops single-seed ablations from being flagged by ordinary seed noise).
+    Otherwise: "no detectable difference".
   * Retrieval has no per-example data, so differences there are descriptive (no test).
 """
 import argparse, collections, csv, glob, json, os
@@ -50,9 +52,14 @@ def paired_bootstrap(ref, test, metric, n_boot=10000, seed=0, mask=None):
     lo, hi = np.percentile(boots, [2.5, 97.5])
     diff = float(D.mean())
     seed_std = float(d.mean(1).std(ddof=1)) if len(seeds) > 1 else 0.0
-    if lo > 0 and diff > seed_std:
+    sel = (lambda r: float(np.mean(np.asarray(r["winoground"]["per_example"][metric], float)[np.asarray(mask)]))) if mask is not None \
+        else (lambda r: r["winoground"][metric])                      # range check must use the SAME subset as the test
+    ref_vals = [sel(ref[s_]) for s_ in ref]
+    test_vals = [sel(test[s_]) for s_ in test]
+    multi = len(ref_vals) > 1                      # with several reference seeds, test must also clear their range
+    if lo > 0 and diff > seed_std and (not multi or min(test_vals) > max(ref_vals)):
         verdict = "test higher"
-    elif hi < 0 and -diff > seed_std:
+    elif hi < 0 and -diff > seed_std and (not multi or max(test_vals) < min(ref_vals)):
         verdict = "test lower"
     else:
         verdict = "no detectable difference"
