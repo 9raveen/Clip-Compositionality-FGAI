@@ -14,15 +14,15 @@ lora_baseline,lora_hn_attr,group,1,-1.5,-3.5000000000000004,0.5,0.0,no detectabl
 lora_baseline,lora_hn_obj,text,1,0.5,-2.5,3.5000000000000004,0.0,no detectable difference
 lora_baseline,lora_hn_obj,image,1,-3.0,-5.25,-0.75,0.0,no detectable difference
 lora_baseline,lora_hn_obj,group,1,-1.0,-3.0,1.0,0.0,no detectable difference
-lora_baseline,lora_hn_rel,text,1,-4.0,-8.25,0.0,0.0,no detectable difference
-lora_baseline,lora_hn_rel,image,1,-2.25,-4.75,0.0,0.0,no detectable difference
-lora_baseline,lora_hn_rel,group,1,-1.25,-3.5000000000000004,1.0,0.0,no detectable difference
+lora_baseline,lora_hn_rel,text,3,-4.666666666666667,-8.25,-1.166666666666667,1.607275126832159,test lower
+lora_baseline,lora_hn_rel,image,3,0.0,-1.9166666666666665,1.9166666666666665,1.984313483298443,no detectable difference
+lora_baseline,lora_hn_rel,group,3,-0.9166666666666666,-2.666666666666667,0.8333333333333331,0.5773502691896258,no detectable difference
 lora_hn,lora_hn_attr,text,1,3.75,-0.25,7.75,0.0,no detectable difference
 lora_hn,lora_hn_attr,image,1,-0.25,-2.75,2.25,0.0,no detectable difference
 lora_hn,lora_hn_attr,group,1,0.0,-2.0,2.0,0.0,no detectable difference
 lora_hn,lora_hn_obj,text,1,4.5,0.75,8.25,0.0,test higher
 lora_hn,lora_hn_obj,image,1,-0.25,-2.5,2.0,0.0,no detectable difference
 lora_hn,lora_hn_obj,group,1,0.5,-1.5,2.5,0.0,no detectable difference
-lora_hn,lora_hn_rel,text,1,0.0,-3.0,3.0,0.0,no detectable difference
-lora_hn,lora_hn_rel,image,1,0.5,-1.5,2.5,0.0,no detectable difference
-lora_hn,lora_hn_rel,group,1,0.25,-1.5,2.0,0.0,no detectable difference
+lora_hn,lora_hn_rel,text,3,-0.16666666666666669,-2.2520833333333314,1.9166666666666665,0.2886751345948129,no detectable difference
+lora_hn,lora_hn_rel,image,3,0.41666666666666685,-1.0833333333333333,1.9166666666666665,0.6291528696058958,no detectable difference
+lora_hn,lora_hn_rel,group,3,-0.24999999999999997,-1.6666666666666667,1.0833333333333333,0.5,no detectable difference
