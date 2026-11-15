@@ -117,7 +117,8 @@ def fig_probe(probe, out):
     fig, ax = plt.subplots(figsize=(8, 3.5))
     bars(ax, types, series, get, COLOR)
     ax.set_xticklabels([f"{t}\n(n={n[t]})" for t in types]); ax.axhline(50, color="black", ls="--", lw=0.8)
-    ax.set_ylabel("caption ranked above its negative (%)"); ax.legend(frameon=False, fontsize=7.5, ncol=2)
+    ax.set_ylim(0, 122); ax.set_yticks(range(0, 101, 20))
+    ax.set_ylabel("caption ranked above its negative (%)"); ax.legend(frameon=False, fontsize=7.5, ncol=4, loc="upper center")
     ax.set_title("Hard-negative probe on validation pairs (attr_swap has too few pairs to interpret)")
     fig.tight_layout(); fig.savefig(out, dpi=150); plt.close(fig)
 
