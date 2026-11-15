@@ -13,6 +13,9 @@ Statistics (fixed in advance):
     reference seed range (stops single-seed ablations from being flagged by ordinary seed noise).
     Otherwise: "no detectable difference".
   * Retrieval has no per-example data, so differences there are descriptive (no test).
+  * Holm-adjusted p-values (two-sided bootstrap p) are computed over the PRE-PLANNED comparisons only
+    (B vs C, B vs C-plaus, C-plaus vs C: 9 Winoground tests, 21 SugarCrepe tests). Rows added with --extra_pairs and
+    the per-tag table are exploratory and uncorrected.
 """
 import argparse, collections, csv, glob, json, os
 import numpy as np
@@ -63,8 +66,65 @@ def paired_bootstrap(ref, test, metric, n_boot=10000, seed=0, mask=None):
         verdict = "test lower"
     else:
         verdict = "no detectable difference"
+    p = max(2 * min(float((boots <= 0).mean()), float((boots >= 0).mean())), 1.0 / n_boot)   # two-sided bootstrap p
     return {"n_seeds": len(seeds), "diff_pp": 100 * diff, "ci_lo_pp": 100 * float(lo), "ci_hi_pp": 100 * float(hi),
-            "seed_std_pp": 100 * seed_std, "verdict": verdict}
+            "seed_std_pp": 100 * seed_std, "verdict": verdict, "p": p}
+
+
+def holm(ps):
+    """Holm-Bonferroni adjusted p-values for a family of tests (same order as input)."""
+    order = np.argsort(ps)
+    m, adj, running = len(ps), [0.0] * len(ps), 0.0
+    for rank, i in enumerate(order):
+        running = max(running, (m - rank) * ps[i])
+        adj[i] = min(1.0, running)
+    return adj
+
+
+def sugarcrepe_section(sc, pairs, n_boot):
+    """SugarCrepe accuracy table + paired bootstrap per task, with the same verdict rule and Holm over the family."""
+    tasks = [t for t in next(iter(sc.values()))[0] if t != "seed"]
+    md = ["", "## SugarCrepe accuracy (%, mean ± std over seeds; zero-shot is a single run)", "",
+          "| config | seeds | " + " | ".join(tasks) + " | mean |", "|---|---|" + "---|" * (len(tasks) + 1)]
+    for c, recs in sc.items():
+        accs = {t: [r[t]["acc"] for r in recs] for t in tasks}
+        avg = [np.mean([accs[t][i] for t in tasks]) for i in range(len(recs))]
+        md.append(f"| {c} | {len(recs)} | " + " | ".join(ms(accs[t]) for t in tasks) + f" | {ms(avg)} |")
+    rows = []
+    for ref, test in pairs:
+        if ref in sc and test in sc:
+            rs, ts = {r["seed"]: r for r in sc[ref]}, {r["seed"]: r for r in sc[test]}
+            seeds = sorted(set(rs) & set(ts))
+            for t in tasks:
+                if not seeds:
+                    continue
+                d = np.array([np.asarray(ts[s_][t]["correct"], float) - np.asarray(rs[s_][t]["correct"], float) for s_ in seeds])
+                D, N = d.mean(0), d.shape[1]
+                boots = D[np.random.default_rng(0).integers(0, N, size=(n_boot, N))].mean(1)
+                lo, hi = np.percentile(boots, [2.5, 97.5])
+                diff = float(D.mean()); sstd = float(d.mean(1).std(ddof=1)) if len(seeds) > 1 else 0.0
+                rv, tv = [r[t]["acc"] for r in sc[ref]], [r[t]["acc"] for r in sc[test]]
+                multi = len(rv) > 1
+                if lo > 0 and diff > sstd and (not multi or min(tv) > max(rv)):
+                    verdict = "test higher"
+                elif hi < 0 and -diff > sstd and (not multi or max(tv) < min(rv)):
+                    verdict = "test lower"
+                else:
+                    verdict = "no detectable difference"
+                p = max(2 * min(float((boots <= 0).mean()), float((boots >= 0).mean())), 1.0 / n_boot)
+                rows.append({"ref": ref, "test": test, "task": t, "seeds": len(seeds), "diff": 100 * diff, "lo": 100 * float(lo),
+                             "hi": 100 * float(hi), "sstd": 100 * sstd, "verdict": verdict, "p": p})
+    conf = [r for r in rows if (r["ref"], r["test"]) in PAIRS]
+    for r in rows:
+        r["holm_p"] = None
+    for r, a in zip(conf, holm([r["p"] for r in conf]) if conf else []):
+        r["holm_p"] = a
+    md += ["", f"## SugarCrepe paired bootstrap (diff = test − ref, pp). Holm-adjusted p over the {len(conf)} pre-planned comparisons; other rows exploratory", "",
+           "| ref | test | task | seeds | diff | 95% CI | seed std | verdict | Holm p |", "|---|---|---|---|---|---|---|---|---|"]
+    for r in rows:
+        md.append(f"| {r['ref']} | {r['test']} | {r['task']} | {r['seeds']} | {r['diff']:+.2f} | [{r['lo']:+.2f}, {r['hi']:+.2f}] | "
+                  f"{r['sstd']:.2f} | {r['verdict']} | {'exploratory' if r['holm_p'] is None else format(r['holm_p'], '.3f')} |")
+    return md, rows
 
 
 def tag_breakdown(runs, tags):
@@ -94,6 +154,7 @@ def main():
     ap.add_argument("--n_boot", type=int, default=10000)
     ap.add_argument("--extra_pairs", nargs="*", default=[], help="ref:test config names, e.g. lora_baseline:lora_hn_attr")
     ap.add_argument("--tags", action="store_true")
+    ap.add_argument("--sugarcrepe", default=None, help="path to sugarcrepe.json (default: results_dir/sugarcrepe.json if present)")
     args = ap.parse_args()
     os.makedirs(args.out_dir, exist_ok=True)
     runs, zs = load(args.results_dir)
@@ -127,17 +188,25 @@ def main():
     md += ["", "val L_CLIP is comparable across conditions. Validation hn_acc is NOT in this table: it is measured on",
            "different negative files for different conditions and can be inflated by text-only shortcuts.", ""]
 
-    md += ["## Paired bootstrap on Winoground (difference = test − ref, percentage points)", "",
-           "| ref | test | metric | seeds | diff | 95% CI | seed std of diff | verdict |", "|---|---|---|---|---|---|---|---|"]
     boot_rows = []
     for ref, test in pairs:
         if ref in runs and test in runs:
             for k in W:
                 b = paired_bootstrap(runs[ref], runs[test], k, args.n_boot)
                 if b:
-                    md.append(f"| {ref} | {test} | {k} | {b['n_seeds']} | {b['diff_pp']:+.2f} | "
-                              f"[{b['ci_lo_pp']:+.2f}, {b['ci_hi_pp']:+.2f}] | {b['seed_std_pp']:.2f} | {b['verdict']} |")
                     boot_rows.append({"ref": ref, "test": test, "metric": k, **b})
+    conf = [r for r in boot_rows if (r["ref"], r["test"]) in PAIRS]
+    for r in boot_rows:
+        r["holm_p"] = None
+    for r, a in zip(conf, holm([r["p"] for r in conf]) if conf else []):
+        r["holm_p"] = a
+    md += ["## Paired bootstrap on Winoground (difference = test − ref, pp). "
+           f"Holm-adjusted p over the {len(conf)} pre-planned comparisons; other rows are exploratory (no correction)", "",
+           "| ref | test | metric | seeds | diff | 95% CI | seed std of diff | verdict | Holm p |", "|---|---|---|---|---|---|---|---|---|"]
+    for r in boot_rows:
+        md.append(f"| {r['ref']} | {r['test']} | {r['metric']} | {r['n_seeds']} | {r['diff_pp']:+.2f} | "
+                  f"[{r['ci_lo_pp']:+.2f}, {r['ci_hi_pp']:+.2f}] | {r['seed_std_pp']:.2f} | {r['verdict']} | "
+                  f"{'exploratory' if r['holm_p'] is None else format(r['holm_p'], '.3f')} |")
     md += ["", "## Retrieval differences (descriptive only: no per-example data, no test)", "",
            "| ref | test | metric | mean diff (pp) | per-seed diff std (pp) |", "|---|---|---|---|---|"]
     for ref, test in pairs:
@@ -156,7 +225,7 @@ def main():
         for c in sorted(runs):
             md.append(f"| {c} | " + " | ".join(ms(tb[(c, t, k)][0]) for t in tags for k in W) + " |")
         md.append("| n examples | " + " | ".join(str(tb[(sorted(runs)[0], t, k)][1]) for t in tags for k in W) + " |")
-        md += ["", "## Paired bootstrap by tag (diff = test − ref, pp). Tags with n < 30 are listed but must not be interpreted.", "",
+        md += ["", "## Paired bootstrap by tag (EXPLORATORY, uncorrected for multiple comparisons; diff = test − ref, pp). Tags with n < 30 must not be interpreted.", "",
                "| ref | test | tag (n) | metric | seeds | diff | 95% CI | seed std of diff | verdict |", "|---|---|---|---|---|---|---|---|---|"]
         tg = np.asarray(tag_list)
         for ref, test in pairs:
@@ -168,6 +237,14 @@ def main():
                             md.append(f"| {ref} | {test} | {t} ({int((tg == t).sum())}) | {k} | {b['n_seeds']} | {b['diff_pp']:+.2f} | "
                                       f"[{b['ci_lo_pp']:+.2f}, {b['ci_hi_pp']:+.2f}] | {b['seed_std_pp']:.2f} | {b['verdict']} |")
 
+    sc_path = args.sugarcrepe or os.path.join(args.results_dir, "sugarcrepe.json")
+    if os.path.exists(sc_path):
+        sc = json.load(open(sc_path))
+        sc_md, sc_rows = sugarcrepe_section(sc, pairs, args.n_boot)
+        md += sc_md
+        if sc_rows:
+            with open(os.path.join(args.out_dir, "sugarcrepe_bootstrap.csv"), "w", newline="") as f:
+                wr = csv.DictWriter(f, fieldnames=list(sc_rows[0])); wr.writeheader(); wr.writerows(sc_rows)
     open(os.path.join(args.out_dir, "summary.md"), "w").write("\n".join(md) + "\n")
     for name, rws in (("summary.csv", csv_rows), ("summary_per_seed.csv", per_seed), ("bootstrap.csv", boot_rows)):
         if rws:
