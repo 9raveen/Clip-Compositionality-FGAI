@@ -15,37 +15,37 @@
 val L_CLIP is comparable across conditions. Validation hn_acc is NOT in this table: it is measured on
 different negative files for different conditions and can be inflated by text-only shortcuts.
 
-## Paired bootstrap on Winoground (difference = test − ref, percentage points)
+## Paired bootstrap on Winoground (difference = test − ref, pp). Holm-adjusted p over the 9 pre-planned comparisons; other rows are exploratory (no correction)
 
-| ref | test | metric | seeds | diff | 95% CI | seed std of diff | verdict |
-|---|---|---|---|---|---|---|---|
-| lora_baseline | lora_hn | text | 3 | -4.50 | [-7.75, -1.33] | 1.32 | test lower |
-| lora_baseline | lora_hn | image | 3 | -0.42 | [-2.33, +1.50] | 2.25 | no detectable difference |
-| lora_baseline | lora_hn | group | 3 | -0.67 | [-2.50, +1.08] | 1.04 | no detectable difference |
-| lora_baseline | lora_hn_plaus | text | 3 | -0.58 | [-2.92, +1.67] | 2.25 | no detectable difference |
-| lora_baseline | lora_hn_plaus | image | 3 | -0.33 | [-2.33, +1.58] | 1.94 | no detectable difference |
-| lora_baseline | lora_hn_plaus | group | 3 | +0.17 | [-1.50, +1.75] | 0.76 | no detectable difference |
-| lora_hn_plaus | lora_hn | text | 3 | -3.92 | [-6.67, -1.25] | 1.15 | test lower |
-| lora_hn_plaus | lora_hn | image | 3 | -0.08 | [-1.42, +1.33] | 0.52 | no detectable difference |
-| lora_hn_plaus | lora_hn | group | 3 | -0.83 | [-2.08, +0.42] | 0.29 | no detectable difference |
-| lora_baseline | lora_hn_attr | text | 1 | -0.25 | [-3.75, +3.25] | 0.00 | no detectable difference |
-| lora_baseline | lora_hn_attr | image | 1 | -3.00 | [-5.75, -0.50] | 0.00 | no detectable difference |
-| lora_baseline | lora_hn_attr | group | 1 | -1.50 | [-3.50, +0.50] | 0.00 | no detectable difference |
-| lora_baseline | lora_hn_obj | text | 1 | +0.50 | [-2.50, +3.50] | 0.00 | no detectable difference |
-| lora_baseline | lora_hn_obj | image | 1 | -3.00 | [-5.25, -0.75] | 0.00 | no detectable difference |
-| lora_baseline | lora_hn_obj | group | 1 | -1.00 | [-3.00, +1.00] | 0.00 | no detectable difference |
-| lora_baseline | lora_hn_rel | text | 3 | -4.67 | [-8.25, -1.17] | 1.61 | test lower |
-| lora_baseline | lora_hn_rel | image | 3 | +0.00 | [-1.92, +1.92] | 1.98 | no detectable difference |
-| lora_baseline | lora_hn_rel | group | 3 | -0.92 | [-2.67, +0.83] | 0.58 | no detectable difference |
-| lora_hn | lora_hn_attr | text | 1 | +3.75 | [-0.25, +7.75] | 0.00 | no detectable difference |
-| lora_hn | lora_hn_attr | image | 1 | -0.25 | [-2.75, +2.25] | 0.00 | no detectable difference |
-| lora_hn | lora_hn_attr | group | 1 | +0.00 | [-2.00, +2.00] | 0.00 | no detectable difference |
-| lora_hn | lora_hn_obj | text | 1 | +4.50 | [+0.75, +8.25] | 0.00 | test higher |
-| lora_hn | lora_hn_obj | image | 1 | -0.25 | [-2.50, +2.00] | 0.00 | no detectable difference |
-| lora_hn | lora_hn_obj | group | 1 | +0.50 | [-1.50, +2.50] | 0.00 | no detectable difference |
-| lora_hn | lora_hn_rel | text | 3 | -0.17 | [-2.25, +1.92] | 0.29 | no detectable difference |
-| lora_hn | lora_hn_rel | image | 3 | +0.42 | [-1.08, +1.92] | 0.63 | no detectable difference |
-| lora_hn | lora_hn_rel | group | 3 | -0.25 | [-1.67, +1.08] | 0.50 | no detectable difference |
+| ref | test | metric | seeds | diff | 95% CI | seed std of diff | verdict | Holm p |
+|---|---|---|---|---|---|---|---|---|
+| lora_baseline | lora_hn | text | 3 | -4.50 | [-7.75, -1.33] | 1.32 | test lower | 0.040 |
+| lora_baseline | lora_hn | image | 3 | -0.42 | [-2.33, +1.50] | 2.25 | no detectable difference | 1.000 |
+| lora_baseline | lora_hn | group | 3 | -0.67 | [-2.50, +1.08] | 1.04 | no detectable difference | 1.000 |
+| lora_baseline | lora_hn_plaus | text | 3 | -0.58 | [-2.92, +1.67] | 2.25 | no detectable difference | 1.000 |
+| lora_baseline | lora_hn_plaus | image | 3 | -0.33 | [-2.33, +1.58] | 1.94 | no detectable difference | 1.000 |
+| lora_baseline | lora_hn_plaus | group | 3 | +0.17 | [-1.50, +1.75] | 0.76 | no detectable difference | 1.000 |
+| lora_hn_plaus | lora_hn | text | 3 | -3.92 | [-6.67, -1.25] | 1.15 | test lower | 0.040 |
+| lora_hn_plaus | lora_hn | image | 3 | -0.08 | [-1.42, +1.33] | 0.52 | no detectable difference | 1.000 |
+| lora_hn_plaus | lora_hn | group | 3 | -0.83 | [-2.08, +0.42] | 0.29 | no detectable difference | 1.000 |
+| lora_baseline | lora_hn_attr | text | 1 | -0.25 | [-3.75, +3.25] | 0.00 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_attr | image | 1 | -3.00 | [-5.75, -0.50] | 0.00 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_attr | group | 1 | -1.50 | [-3.50, +0.50] | 0.00 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_obj | text | 1 | +0.50 | [-2.50, +3.50] | 0.00 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_obj | image | 1 | -3.00 | [-5.25, -0.75] | 0.00 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_obj | group | 1 | -1.00 | [-3.00, +1.00] | 0.00 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_rel | text | 3 | -4.67 | [-8.25, -1.17] | 1.61 | test lower | exploratory |
+| lora_baseline | lora_hn_rel | image | 3 | +0.00 | [-1.92, +1.92] | 1.98 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_rel | group | 3 | -0.92 | [-2.67, +0.83] | 0.58 | no detectable difference | exploratory |
+| lora_hn | lora_hn_attr | text | 1 | +3.75 | [-0.25, +7.75] | 0.00 | no detectable difference | exploratory |
+| lora_hn | lora_hn_attr | image | 1 | -0.25 | [-2.75, +2.25] | 0.00 | no detectable difference | exploratory |
+| lora_hn | lora_hn_attr | group | 1 | +0.00 | [-2.00, +2.00] | 0.00 | no detectable difference | exploratory |
+| lora_hn | lora_hn_obj | text | 1 | +4.50 | [+0.75, +8.25] | 0.00 | test higher | exploratory |
+| lora_hn | lora_hn_obj | image | 1 | -0.25 | [-2.50, +2.00] | 0.00 | no detectable difference | exploratory |
+| lora_hn | lora_hn_obj | group | 1 | +0.50 | [-1.50, +2.50] | 0.00 | no detectable difference | exploratory |
+| lora_hn | lora_hn_rel | text | 3 | -0.17 | [-2.25, +1.92] | 0.29 | no detectable difference | exploratory |
+| lora_hn | lora_hn_rel | image | 3 | +0.42 | [-1.08, +1.92] | 0.63 | no detectable difference | exploratory |
+| lora_hn | lora_hn_rel | group | 3 | -0.25 | [-1.67, +1.08] | 0.50 | no detectable difference | exploratory |
 
 ## Retrieval differences (descriptive only: no per-example data, no test)
 
@@ -84,7 +84,7 @@ different negative files for different conditions and can be inflated by text-on
 | lora_hn_rel | 65.4 ± 6.7 | 35.9 ± 2.2 | 30.8 ± 3.8 | 35.5 ± 1.2 | 13.0 ± 1.8 | 8.3 ± 0.8 | 21.5 ± 1.5 | 9.3 ± 1.0 | 4.9 ± 0.9 |
 | n examples | 26 | 26 | 26 | 141 | 141 | 141 | 233 | 233 | 233 |
 
-## Paired bootstrap by tag (diff = test − ref, pp). Tags with n < 30 are listed but must not be interpreted.
+## Paired bootstrap by tag (EXPLORATORY, uncorrected for multiple comparisons; diff = test − ref, pp). Tags with n < 30 must not be interpreted.
 
 | ref | test | tag (n) | metric | seeds | diff | 95% CI | seed std of diff | verdict |
 |---|---|---|---|---|---|---|---|---|
@@ -169,3 +169,83 @@ different negative files for different conditions and can be inflated by text-on
 | lora_hn | lora_hn_rel | Relation (233) | text | 3 | -0.57 | [-3.58, +2.29] | 1.51 | no detectable difference |
 | lora_hn | lora_hn_rel | Relation (233) | image | 3 | +0.00 | [-2.00, +2.00] | 1.49 | no detectable difference |
 | lora_hn | lora_hn_rel | Relation (233) | group | 3 | -0.57 | [-2.29, +0.86] | 0.89 | no detectable difference |
+
+## SugarCrepe accuracy (%, mean ± std over seeds; zero-shot is a single run)
+
+| config | seeds | replace_obj | replace_att | replace_rel | swap_obj | swap_att | add_obj | add_att | mean |
+|---|---|---|---|---|---|---|---|---|---|
+| zeroshot | 1 | 90.7 | 80.3 | 69.4 | 61.2 | 64.0 | 77.1 | 69.5 | 73.2 |
+| lora_baseline | 3 | 94.2 ± 0.2 | 85.8 ± 1.2 | 69.3 ± 0.2 | 63.1 ± 0.6 | 69.2 ± 0.8 | 86.5 ± 0.4 | 78.0 ± 0.6 | 78.0 ± 0.2 |
+| lora_hn | 3 | 93.4 ± 0.3 | 86.3 ± 0.8 | 75.5 ± 0.3 | 68.2 ± 1.1 | 72.1 ± 0.9 | 85.6 ± 0.3 | 81.7 ± 1.0 | 80.4 ± 0.2 |
+| lora_hn_plaus | 3 | 93.6 ± 0.2 | 86.8 ± 0.1 | 73.6 ± 0.5 | 66.5 ± 1.1 | 71.2 ± 0.5 | 86.8 ± 0.2 | 82.1 ± 1.1 | 80.1 ± 0.1 |
+| lora_hn_rel | 3 | 92.9 ± 0.1 | 85.1 ± 0.3 | 75.6 ± 0.6 | 68.6 ± 0.4 | 71.1 ± 0.6 | 83.5 ± 0.1 | 80.2 ± 1.1 | 79.6 ± 0.1 |
+| lora_hn_attr | 1 | 93.5 | 86.7 | 70.3 | 66.5 | 71.6 | 85.4 | 82.1 | 79.4 |
+| lora_hn_obj | 1 | 93.7 | 84.0 | 69.7 | 63.7 | 67.4 | 88.5 | 79.0 | 78.0 |
+
+## SugarCrepe paired bootstrap (diff = test − ref, pp). Holm-adjusted p over the 21 pre-planned comparisons; other rows exploratory
+
+| ref | test | task | seeds | diff | 95% CI | seed std | verdict | Holm p |
+|---|---|---|---|---|---|---|---|---|
+| lora_baseline | lora_hn | replace_obj | 3 | -0.81 | [-1.55, -0.10] | 0.13 | test lower | 0.378 |
+| lora_baseline | lora_hn | replace_att | 3 | +0.51 | [-1.10, +2.20] | 1.37 | no detectable difference | 1.000 |
+| lora_baseline | lora_hn | replace_rel | 3 | +6.24 | [+4.55, +7.94] | 0.08 | test higher | 0.002 |
+| lora_baseline | lora_hn | swap_obj | 3 | +5.03 | [-0.41, +10.34] | 1.55 | no detectable difference | 0.787 |
+| lora_baseline | lora_hn | swap_att | 3 | +2.90 | [+0.40, +5.36] | 0.83 | test higher | 0.306 |
+| lora_baseline | lora_hn | add_obj | 3 | -0.84 | [-1.75, +0.05] | 0.23 | no detectable difference | 0.787 |
+| lora_baseline | lora_hn | add_att | 3 | +3.66 | [+1.49, +5.78] | 1.20 | test higher | 0.014 |
+| lora_baseline | lora_hn_plaus | replace_obj | 3 | -0.65 | [-1.27, -0.04] | 0.13 | test lower | 0.424 |
+| lora_baseline | lora_hn_plaus | replace_att | 3 | +0.93 | [-0.72, +2.58] | 1.18 | no detectable difference | 1.000 |
+| lora_baseline | lora_hn_plaus | replace_rel | 3 | +4.27 | [+2.92, +5.64] | 0.33 | test higher | 0.002 |
+| lora_baseline | lora_hn_plaus | swap_obj | 3 | +3.40 | [-1.50, +8.30] | 1.43 | no detectable difference | 1.000 |
+| lora_baseline | lora_hn_plaus | swap_att | 3 | +2.00 | [-0.20, +4.21] | 0.98 | no detectable difference | 0.787 |
+| lora_baseline | lora_hn_plaus | add_obj | 3 | +0.36 | [-0.40, +1.12] | 0.57 | no detectable difference | 1.000 |
+| lora_baseline | lora_hn_plaus | add_att | 3 | +4.09 | [+2.12, +6.07] | 0.51 | test higher | 0.002 |
+| lora_hn_plaus | lora_hn | replace_obj | 3 | -0.16 | [-0.67, +0.34] | 0.24 | no detectable difference | 1.000 |
+| lora_hn_plaus | lora_hn | replace_att | 3 | -0.42 | [-1.69, +0.85] | 0.84 | no detectable difference | 1.000 |
+| lora_hn_plaus | lora_hn | replace_rel | 3 | +1.97 | [+0.76, +3.20] | 0.27 | test higher | 0.022 |
+| lora_hn_plaus | lora_hn | swap_obj | 3 | +1.63 | [-1.77, +5.03] | 1.87 | no detectable difference | 1.000 |
+| lora_hn_plaus | lora_hn | swap_att | 3 | +0.90 | [-0.85, +2.65] | 0.60 | no detectable difference | 1.000 |
+| lora_hn_plaus | lora_hn | add_obj | 3 | -1.20 | [-1.89, -0.50] | 0.39 | test lower | 0.020 |
+| lora_hn_plaus | lora_hn | add_att | 3 | -0.43 | [-1.73, +0.87] | 1.38 | no detectable difference | 1.000 |
+| lora_baseline | lora_hn_attr | replace_obj | 1 | -0.85 | [-1.63, -0.06] | 0.00 | test lower | exploratory |
+| lora_baseline | lora_hn_attr | replace_att | 1 | +2.16 | [+0.00, +4.31] | 0.00 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_attr | replace_rel | 1 | +1.07 | [-0.50, +2.63] | 0.00 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_attr | swap_obj | 1 | +4.08 | [-0.82, +8.98] | 0.00 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_attr | swap_att | 1 | +1.95 | [-0.75, +4.80] | 0.00 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_attr | add_obj | 1 | -1.55 | [-2.67, -0.48] | 0.00 | test lower | exploratory |
+| lora_baseline | lora_hn_attr | add_att | 1 | +4.77 | [+2.31, +7.37] | 0.00 | test higher | exploratory |
+| lora_baseline | lora_hn_obj | replace_obj | 1 | -0.61 | [-1.39, +0.18] | 0.00 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_obj | replace_att | 1 | -0.51 | [-2.03, +1.02] | 0.00 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_obj | replace_rel | 1 | +0.43 | [-0.85, +1.78] | 0.00 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_obj | swap_obj | 1 | +1.22 | [-3.67, +6.12] | 0.00 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_obj | swap_att | 1 | -2.25 | [-4.65, +0.15] | 0.00 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_obj | add_obj | 1 | +1.50 | [+0.63, +2.38] | 0.00 | test higher | exploratory |
+| lora_baseline | lora_hn_obj | add_att | 1 | +1.73 | [+0.00, +3.61] | 0.00 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_rel | replace_obj | 3 | -1.33 | [-2.04, -0.65] | 0.18 | test lower | exploratory |
+| lora_baseline | lora_hn_rel | replace_att | 3 | -0.76 | [-2.33, +0.80] | 0.92 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_rel | replace_rel | 3 | +6.31 | [+4.53, +8.13] | 0.68 | test higher | exploratory |
+| lora_baseline | lora_hn_rel | swap_obj | 3 | +5.44 | [+0.14, +10.75] | 0.24 | test higher | exploratory |
+| lora_baseline | lora_hn_rel | swap_att | 3 | +1.90 | [-0.65, +4.45] | 1.35 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_rel | add_obj | 3 | -2.99 | [-3.93, -2.09] | 0.52 | test lower | exploratory |
+| lora_baseline | lora_hn_rel | add_att | 3 | +2.12 | [-0.10, +4.29] | 1.69 | no detectable difference | exploratory |
+| lora_hn | lora_hn_attr | replace_obj | 1 | +0.06 | [-0.73, +0.85] | 0.00 | no detectable difference | exploratory |
+| lora_hn | lora_hn_attr | replace_att | 1 | +0.51 | [-1.27, +2.29] | 0.00 | no detectable difference | exploratory |
+| lora_hn | lora_hn_attr | replace_rel | 1 | -5.26 | [-7.18, -3.34] | 0.00 | test lower | exploratory |
+| lora_hn | lora_hn_attr | swap_obj | 1 | -2.04 | [-7.35, +3.27] | 0.00 | no detectable difference | exploratory |
+| lora_hn | lora_hn_attr | swap_att | 1 | +0.00 | [-2.55, +2.70] | 0.00 | no detectable difference | exploratory |
+| lora_hn | lora_hn_attr | add_obj | 1 | -0.63 | [-1.65, +0.39] | 0.00 | no detectable difference | exploratory |
+| lora_hn | lora_hn_attr | add_att | 1 | +0.14 | [-2.02, +2.17] | 0.00 | no detectable difference | exploratory |
+| lora_hn | lora_hn_obj | replace_obj | 1 | +0.30 | [-0.48, +1.09] | 0.00 | no detectable difference | exploratory |
+| lora_hn | lora_hn_obj | replace_att | 1 | -2.16 | [-4.19, -0.25] | 0.00 | test lower | exploratory |
+| lora_hn | lora_hn_obj | replace_rel | 1 | -5.90 | [-7.82, -3.98] | 0.00 | test lower | exploratory |
+| lora_hn | lora_hn_obj | swap_obj | 1 | -4.90 | [-10.61, +0.82] | 0.00 | no detectable difference | exploratory |
+| lora_hn | lora_hn_obj | swap_att | 1 | -4.20 | [-6.91, -1.50] | 0.00 | test lower | exploratory |
+| lora_hn | lora_hn_obj | add_obj | 1 | +2.42 | [+1.41, +3.44] | 0.00 | test higher | exploratory |
+| lora_hn | lora_hn_obj | add_att | 1 | -2.89 | [-5.06, -0.72] | 0.00 | test lower | exploratory |
+| lora_hn | lora_hn_rel | replace_obj | 3 | -0.52 | [-1.09, +0.02] | 0.29 | no detectable difference | exploratory |
+| lora_hn | lora_hn_rel | replace_att | 3 | -1.27 | [-2.75, +0.21] | 0.71 | no detectable difference | exploratory |
+| lora_hn | lora_hn_rel | replace_rel | 3 | +0.07 | [-0.92, +1.07] | 0.61 | no detectable difference | exploratory |
+| lora_hn | lora_hn_rel | swap_obj | 3 | +0.41 | [-2.18, +2.99] | 1.41 | no detectable difference | exploratory |
+| lora_hn | lora_hn_rel | swap_att | 3 | -1.00 | [-2.90, +0.90] | 1.20 | no detectable difference | exploratory |
+| lora_hn | lora_hn_rel | add_obj | 3 | -2.15 | [-2.88, -1.44] | 0.47 | test lower | exploratory |
+| lora_hn | lora_hn_rel | add_att | 3 | -1.54 | [-3.18, +0.10] | 1.01 | no detectable difference | exploratory |
