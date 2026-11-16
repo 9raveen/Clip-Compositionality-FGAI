@@ -1,0 +1,121 @@
+type,image_id,caption,negative,label
+attr_replace,239089,A white toilet sitting in a bathroom next to a shower.,A red toilet sitting in a bathroom next to a shower.,1
+attr_replace,227558,A tree in a window sill in front of a tall window.,A tree in a window sill in front of a short window.,0
+attr_replace,286981,A woman is posing with an open pizza box.,A woman is posing with a closed pizza box.,1
+attr_replace,52924,A motorcycle parked on top of a black rug.,A motorcycle parked on top of a pink rug.,1
+attr_replace,553056,a blue and white bus is on some tracks,a green and white bus is on some tracks,1
+attr_replace,158372,"A blue, hard-sided suitcase with wheels sits on a counter.","A white, hard-sided suitcase with wheels sits on a counter.",1
+attr_replace,454982,Two laptops side by side on a green table.,Two laptops side by side on a black table.,1
+attr_replace,514280,A yellow bathroom through a fish lens view,A brown bathroom through a fish lens view,0
+attr_replace,248019,A blue and white vase sitting in front of pictures on the wall of the same design.,A red and white vase sitting in front of pictures on the wall of the same design.,1
+attr_replace,84448,A gray cat sleeping on a towel on a bed.,A black cat sleeping on a towel on a bed.,0
+attr_replace,113132,An Apple laptop is sitting with its desktop open near a small teddy bear and writing utensils.,An Apple laptop is sitting with its desktop open near a big teddy bear and writing utensils.,0
+attr_replace,34816,A man with glasses frowns in front of a microphone with a large projection on the wall behind him.,A man with glasses frowns in front of a microphone with a small projection on the wall behind him.,0
+attr_replace,580507,A man creating a large splash on his surfboard,A man creating a small splash on his surfboard,0
+attr_replace,381633,A man is sitting with a book in between his knees on a red couch.,A man is sitting with a book in between his knees on a black couch.,1
+attr_replace,377679,A group of four vases filled with white and yellow flowers.,A group of four vases filled with brown and yellow flowers.,0
+attr_replace,28957,a black bear holding onto a tree as he reaches for a coconut with his mouth,a gray bear holding onto a tree as he reaches for a coconut with his mouth,0
+attr_replace,467457,A close up of a white bowl filled with shiny oranges.,A close up of an orange bowl filled with shiny oranges.,0
+attr_replace,515374,A teddy bear smiles against a blue and geometric print background.,A teddy bear smiles against a purple and geometric print background.,0
+attr_replace,467457,a glass bowel filled with full oranges,a glass bowel filled with empty oranges,1
+attr_replace,521763,A woman displaying several large bunches of bananas.,A woman displaying several small bunches of bananas.,0
+attr_replace,53580,A young man riding a transit bus looking at something.,An old man riding a transit bus looking at something.,
+attr_replace,121446,An orange cat with its head laying on a laptop.,A brown cat with its head laying on a laptop.,
+attr_replace,181173,broccoli on a cutting board with a big knife two legs by a garden plant and some other plants,broccoli on a cutting board with a small knife two legs by a garden plant and some other plants,
+attr_replace,40399,A man in a blue shirt is smiling buckled up in a car.,A man in a red shirt is smiling buckled up in a car.,
+attr_replace,561591,a very large airplane that is flying over head,a very small airplane that is flying over head,
+attr_replace,1306,a table with chairs a counter with stools with large windows,a table with chairs a counter with stools with small windows,
+attr_replace,273688,The large rectangular cheese pizza looks delicious.,The small rectangular cheese pizza looks delicious.,
+attr_replace,193560,a very large herd of zebras some grazing some looking around,a very small herd of zebras some grazing some looking around,
+attr_replace,84128,four people standing up playing nintendo wii in a large room,four people standing up playing nintendo wii in a small room,
+attr_replace,121745,An orange slice with a scoop of sherbert ice cream.,A blue slice with a scoop of sherbert ice cream.,
+attr_replace,295765,A white airplane with a single propeller and double stacked wings.,A black airplane with a single propeller and double stacked wings.,
+attr_replace,176765,A person on a bike near a large bus.,A person on a bike near a small bus.,
+attr_replace,348487,"A black, silver and yellow motorcycle sits on a dirt pathway near some bushes.","A brown, silver and yellow motorcycle sits on a dirt pathway near some bushes.",
+attr_replace,404064,A large metal clock hanging from a light pole.,A small metal clock hanging from a light pole.,
+attr_replace,265810,A young lady is showing off her pizza and accessory.,An old lady is showing off her pizza and accessory.,
+attr_replace,385849,A large clock tower at the end of a two story white building.,A large clock tower at the end of a two story orange building.,
+attr_replace,156806,A red vase with long pink daisies set on a floor.,A red vase with long black daisies set on a floor.,
+attr_replace,8646,Cars traveling on a three-way with large truck in the middle,Cars traveling on a three-way with small truck in the middle,
+attr_replace,430681,A bear standing in a river below a small waterfall.,A bear standing in a river below a big waterfall.,
+attr_replace,428389,A large green truck on a paved road.,A small green truck on a paved road.,
+attr_swap,256628,A yellow dog relaxing with a leash attached to a chair and a blue bowl of water nearby.,A blue dog relaxing with a leash attached to a chair and a yellow bowl of water nearby.,1
+attr_swap,61207,A large jetliner flying over a small farm near a forest.,A small jetliner flying over a large farm near a forest.,0
+attr_swap,80747,"A little girl in a pink shirt, white pants and white shoes sitting in a swing with her teddy bear.","A little girl in a white shirt, pink pants and white shoes sitting in a swing with her teddy bear.",1
+attr_swap,532753,A formation of red fighter jets flying through a blue sky.,A formation of blue fighter jets flying through a red sky.,1
+attr_swap,580829,A small yellow and black car driving around the bend of a road between large hill formations.,A large yellow and black car driving around the bend of a road between small hill formations.,0
+attr_swap,264201,A yellow fire hydrant sits by green trash cans in the snow.,A green fire hydrant sits by yellow trash cans in the snow.,1
+attr_swap,533255,A kitchen that has white cabinets and black counters.,A kitchen that has black cabinets and white counters.,1
+attr_swap,197759,A tall giraffe stands next to large trees.,A large giraffe stands next to tall trees.,0
+attr_swap,258679,a man in a red jacket and two white brown and black dogs,a man in a white jacket and two red brown and black dogs,1
+attr_swap,113949,A white cow leading six brown cows along a beach,A brown cow leading six white cows along a beach,1
+attr_swap,378293,A white horse and boy in an orange shirt in the streets,An orange horse and boy in a white shirt in the streets,1
+attr_swap,277793,A black cat is sitting on a red suitcase.,A red cat is sitting on a black suitcase.,1
+attr_swap,275271,A white table with a black surface that has 3 vases on it.,A black table with a white surface that has 3 vases on it.,1
+attr_swap,531023,A white toilet in a black bathroom with a phone on the wall.,A black toilet in a white bathroom with a phone on the wall.,1
+attr_swap,362783,A white bird flying over the blue water,A blue bird flying over the white water,1
+attr_swap,449307,A group of white sheep in field with a black dog.,A group of black sheep in field with a white dog.,1
+attr_swap,218761,Chocolate candy covered in white chocolate and topped with a red berry and leaves,Chocolate candy covered in red chocolate and topped with a white berry and leaves,1
+attr_swap,15002,A boy in yellow shirt and blue shorts playing tennis.,A boy in blue shirt and yellow shorts playing tennis.,1
+attr_swap,427921,A white horse wearing a blue sash around its neck,A blue horse wearing a white sash around its neck,1
+attr_swap,318888,a man in a yellow shirt holding a white dog and making a face,a man in a white shirt holding a yellow dog and making a face,1
+attr_swap,359066,A woman in a red jacket sits astride a white horse.,A woman in a white jacket sits astride a red horse.,
+attr_swap,395551,A white house with a red top next to the ocean.,A red house with a white top next to the ocean.,
+attr_swap,379165,A yellow and white kitten laying on a black computer mouse.,A black and white kitten laying on a yellow computer mouse.,
+attr_swap,470711,Small grey and white cat sitting on a black computer chair.,Small grey and black cat sitting on a white computer chair.,
+attr_swap,249352,"A small stall with large tiles, a toilet and two plungers","A large stall with small tiles, a toilet and two plungers",
+attr_swap,450215,a red silver and white motorcycle is parked and some buildings,a white silver and red motorcycle is parked and some buildings,
+attr_swap,145093,A tall multi-story building with a large clock atop it.,A large multi-story building with a tall clock atop it.,
+attr_swap,247699,A picture of a pink wedding cake on a blue stand.,A picture of a blue wedding cake on a pink stand.,
+attr_swap,69214,a bedroom with a white chair a table and a brown blue and white bed,a bedroom with a brown chair a table and a white blue and white bed,
+attr_swap,121152,A red and white bus sits below a blue overpass.,A blue and white bus sits below a red overpass.,
+attr_swap,226795,A small hide away bed with a large wooden frame.,A large hide away bed with a small wooden frame.,
+attr_swap,368970,White dog playing frisbee on a green soccer field.,Green dog playing frisbee on a white soccer field.,
+attr_swap,485933,"A white plate sits on a blue cloth and the plate has tomatoes, bread and potatoes on it.","A blue plate sits on a white cloth and the plate has tomatoes, bread and potatoes on it.",
+attr_swap,416384,a blond wearing a black top and sitting in a white chair,a blond wearing a white top and sitting in a black chair,
+attr_swap,156806,A red vase with long pink daisies set on a floor.,A pink vase with long red daisies set on a floor.,
+attr_swap,21645,"Home living room with brown walls with white trim, fireplace, and tan furnishings.","Home living room with white walls with brown trim, fireplace, and tan furnishings.",
+attr_swap,187887,a white plate with a pickle pizza pretzels and red fruit,a red plate with a pickle pizza pretzels and white fruit,
+attr_swap,273371,A large metal refrigerator in a small kitchen.,A small metal refrigerator in a large kitchen.,
+attr_swap,355270,a yellow flower in a vase sitting on a shelf in front of a red painting with only one eye on it,a red flower in a vase sitting on a shelf in front of a yellow painting with only one eye on it,
+attr_swap,165750,A bathroom with green tile and a red shower curtain.,A bathroom with red tile and a green shower curtain.,
+obj_replace,292827,A cat is looking at a bowl full of carrots on the table.,A giraffe is looking at a bowl full of carrots on the table.,1
+obj_replace,413600,a well-made bed with many pillows in front of a window looking out into a night scene,a well-made couch with many pillows in front of a window looking out into a night scene,1
+obj_replace,451674,A yellow kite floats above people on a road.,A yellow surfboard floats above people on a road.,1
+obj_replace,232993,A boy sitting at a table eating in front of a plate and bowl.,A boy sitting at a table eating in front of a plate and knife.,0
+obj_replace,376505,a bed room with a neatly made bed and a night stand,a couch room with a neatly made bed and a night stand,1
+obj_replace,230175,A woman posing with two boys and two little girls.,A man posing with two boys and two little girls.,0
+obj_replace,527012,an image of a man by a stop sign,an image of a woman by a stop sign,0
+obj_replace,340368,A skateboarder doing a trick on a bench.,A skateboarder doing a trick on a bed.,1
+obj_replace,193240,A dog that is standing up with shoe in its mouth.,A zebra that is standing up with shoe in its mouth.,1
+obj_replace,413719,A man with skiing gear on top of a mountain with snow,A woman with skiing gear on top of a mountain with snow,0
+obj_replace,355806,a black and white dog holding a plate with a mouth,a black and white cat holding a plate with a mouth,1
+obj_replace,253285,an airplane that is on a airport runway,a train that is on an airport runway,1
+obj_replace,433951,A toasted mushroom pizza and a glass of beer for dinner.,A toasted mushroom cake and a glass of beer for dinner.,1
+obj_replace,115403,The cat is playing with a stuffed animal.,The giraffe is playing with a stuffed animal.,1
+obj_replace,543831,A man in a blue shirt playing tennis.,A woman in a blue shirt playing tennis.,0
+obj_replace,371861,Plate encircled with different old west branding monograms with three pieces of food in the middle,bowl encircled with different old west branding monograms with three pieces of food in the middle,0
+obj_replace,310665,a woman at the counter cutting food and making food,a man at the counter cutting food and making food,0
+obj_replace,210031,A woman with a walker is sitting on a park bench.,A man with a walker is sitting on a park bench.,0
+obj_replace,104884,A bed is on a shiny wooden waxed floor.,A couch is on a shiny wooden waxed floor.,0
+obj_replace,45626,A man hitting a baseball and a man catching it.,A woman hitting a baseball and a man catching it.,0
+obj_replace,153677,A woman wearing a ruffled scarf holding a wii remote.,A man wearing a ruffled scarf holding a wii remote.,
+obj_replace,386841,Fork next to a plate of pizza and salad on the table,Fork next to a bowl of pizza and salad on the table,
+obj_replace,280370,A couple of men riding horses next to a cow.,A couple of men riding horses next to a horse.,
+obj_replace,174694,A book sits on a bed about Mother Teresa.,A book sits on a bench about Mother Teresa.,
+obj_replace,84397,A man riding a blue surfboard on a wave in the ocean.,A man riding a blue frisbee on a wave in the ocean.,
+obj_replace,277857,An Asian woman is eating a meal in a restaurant.,An Asian man is eating a meal in a restaurant.,
+obj_replace,505111,A plate that has an omelet on it.,A cup that has an omelet on it.,
+obj_replace,54399,A cat in a handbag on top of an end table.,A horse in a handbag on top of an end table.,
+obj_replace,184940,a white plate some bread and a small fork,a white plate some bread and a small spoon,
+obj_replace,130419,A smiling woman standing on a sidewalk beside two pieces of luggage.,A smiling man standing on a sidewalk beside two pieces of luggage.,
+obj_replace,18809,"A young man sets on a sidewalk, playing an old guitar while a dog lays in the guitar case.","A young woman sets on a sidewalk, playing an old guitar while a dog lays in the guitar case.",
+obj_replace,239515,A woman with glasses holds a baseball bat over her shoulder.,A man with glasses holds a baseball bat over her shoulder.,
+obj_replace,387601,A man standing next to a parking lot filled with cars.,A woman standing next to a parking lot filled with cars.,
+obj_replace,339734,some men working on a motorcycle outdoors and a truck,some men working on a motorcycle outdoors and a bicycle,
+obj_replace,522990,A horse that is standing in front of a carriage.,A bird that is standing in front of a carriage.,
+obj_replace,214958,A man that is holding a surfboard near the water,A woman that is holding a surfboard near the water,
+obj_replace,222395,a bird is standing on a white table,a horse is standing on a white table,
+obj_replace,559908,The woman is trying to hit the tennis ball.,The man is trying to hit the tennis ball.,
+obj_replace,533030,"A red, green and yellow paper plate holding a piece of pizza.","A red, green and yellow paper cup holding a piece of pizza.",
+obj_replace,67785,A boy stares at a pizza with a birthday candle in it.,A girl stares at a pizza with a birthday candle in it.,
