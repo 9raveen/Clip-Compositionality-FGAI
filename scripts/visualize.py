@@ -14,10 +14,13 @@ import matplotlib.pyplot as plt
 MAIN = ["zeroshot", "lora_baseline", "lora_hn", "lora_hn_plaus"]
 LABEL = {"zeroshot": "A zero-shot", "lora_baseline": "B LoRA baseline", "lora_hn": "C hard negatives (all)",
          "lora_hn_plaus": "C-plaus matched negs", "lora_hn_attr": "attribute only", "lora_hn_obj": "object only",
-         "lora_hn_rel": "relation only", "lora_hn_lam05": "lambda 0.5", "lora_hn_lam2": "lambda 2"}
+         "lora_hn_rel": "relation only", "lora_hn_lam05": "lambda 0.5", "lora_hn_lam2": "lambda 2",
+         "lora_hn_objswap": "obj_swap only", "lora_hn_relrep": "rel_replace only"}
 COLOR = {"zeroshot": "#9a9a9a", "lora_baseline": "#4c78a8", "lora_hn": "#e45756", "lora_hn_plaus": "#54a24b",
-         "lora_hn_attr": "#f2b134", "lora_hn_obj": "#b279a2", "lora_hn_rel": "#ff9da6", "lora_hn_lam05": "#79706e", "lora_hn_lam2": "#9d7660"}
-ABL = ["lora_baseline", "lora_hn", "lora_hn_plaus", "lora_hn_attr", "lora_hn_obj", "lora_hn_rel", "lora_hn_lam05", "lora_hn_lam2"]
+         "lora_hn_attr": "#f2b134", "lora_hn_obj": "#b279a2", "lora_hn_rel": "#ff9da6", "lora_hn_lam05": "#79706e", "lora_hn_lam2": "#9d7660",
+         "lora_hn_objswap": "#17becf", "lora_hn_relrep": "#bcbd22"}
+ABL = ["lora_baseline", "lora_hn", "lora_hn_plaus", "lora_hn_attr", "lora_hn_obj", "lora_hn_rel", "lora_hn_objswap", "lora_hn_relrep",
+       "lora_hn_lam05", "lora_hn_lam2"]
 plt.rcParams.update({"font.size": 9, "axes.spines.top": False, "axes.spines.right": False})
 
 
