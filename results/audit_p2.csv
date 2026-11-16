@@ -1,0 +1,81 @@
+type,image_id,caption,negative,label
+obj_swap,121949,some men on surfboards out on the water,surfboards on some men out on the water,1
+obj_swap,528224,A baseball player hitting a ball with a baseball bat.,A ball hitting a baseball player with a baseball bat.,1
+obj_swap,41838,A person pointing a remote control towards a television.,A remote control pointing a person towards a television.,1
+obj_swap,475743,A television is sitting on a stand in a living room.,A stand is sitting on a television in a living room.,1
+obj_swap,336645,A tennis player serving a tennis ball during a match.,A tennis ball serving a tennis player during a match.,1
+obj_swap,305690,A dog holding a frisbee in its mouth,A frisbee holding a dog in its mouth,1
+obj_swap,82259,Skiers on snow covered mountain on cloudy day.,Mountain on snow covered skiers on cloudy day.,1
+obj_swap,53088,A person putting sliced carrots into a dish.,Sliced carrots putting a person into a dish.,1
+obj_swap,65245,some men pushing a truck out of a ditch,a truck pushing some men out of a ditch,1
+obj_swap,324460,A street has a sign on it with people walking on it.,A sign has a street on it with people walking on it.,1
+obj_swap,228722,A man placing pizza on a plate through an opening.,Pizza placing a man on a plate through an opening.,1
+obj_swap,207764,A man standing on a beach next to a child holding a surfboard.,A man standing on a beach next to a surfboard holding a child.,1
+obj_swap,414821,a man holding a colorful surfboard going towards the ocean,a colorful surfboard holding a man going towards the ocean,1
+obj_swap,131160,A street scene with focus on a street sign.,A street scene with a street sign on focus.,0
+obj_swap,272613,A system failure message over windows on a computer screen.,A computer screen over windows on a system failure message.,1
+obj_swap,76765,A woman pulls a wheeled suitcase past a fire hydrant.,A wheeled suitcase pulls a woman past a fire hydrant.,1
+obj_swap,772,Two sheep stand next to a fence on grass.,Two sheep stand next to grass on a fence.,1
+obj_swap,76918,A grey bird on beach with water and pier in the background.,Beach on a grey bird with water and pier in the background.,1
+obj_swap,508251,A floating watch tower along a tower on dry land with the tide out.,Dry land along a tower on a floating watch tower with the tide out.,0
+obj_swap,258336,a white bear holding a heart sitting on a bed,a heart holding a white bear sitting on a bed,1
+obj_swap,159842,A smiling little girl hugging a teddy bear.,A teddy bear hugging a smiling little girl.,
+obj_swap,198532,Two people mounted on horses drinking from a water trough.,Horses mounted on two people drinking from a water trough.,
+obj_swap,487409,A row of multi colored teddy bears hanging from a rope under a tent.,A tent of multi colored teddy bears hanging from a rope under a row.,
+obj_swap,64236,A woman wearing a watch holding a badminton racket.,A watch wearing a woman holding a badminton racket.,
+obj_swap,116994,An airplane facing away on concrete under blue sky.,Blue sky facing away on concrete under an airplane.,
+obj_swap,93034,Lady walking a Great Dane in front of a hotel lobby with door man looking on.,A Great Dane walking lady in front of a hotel lobby with door man looking on.,
+obj_swap,87214,Two adults are watching children as they ski.,Children are watching two adults as they ski.,
+obj_swap,321717,Person grilling several ham sandwiches on white bread.,Several ham sandwiches grilling person on white bread.,
+obj_swap,298987,A boy has a kite in a large plaza with other people walking around.,A kite has a boy in a large plaza with other people walking around.,
+obj_swap,214975,A brown table holding a cake fashioned to look like a truck.,A cake holding a brown table fashioned to look like a truck.,
+obj_swap,48181,Black and white photo of the clock tower on Parliament.,Black and white photo of Parliament on the clock tower.,
+obj_swap,273075,A cat is nibbling at a shoelace on a sneaker.,A cat is nibbling at a sneaker on a shoelace.,
+obj_swap,88789,A dog holding a plate while sitting on a chair.,A plate holding a dog while sitting on a chair.,
+obj_swap,431917,A young woman looking at a cheese pizza on her plate.,A young woman looking at her plate on a cheese pizza.,
+obj_swap,30055,Three kites above a car in front of a building.,A car above three kites in front of a building.,
+obj_swap,205949,A bathroom with a tree on the shower curtain.,A bathroom with the shower curtain on a tree.,
+obj_swap,122987,A small giraffe putting it's face toward a large giraffe.,It's face putting a small giraffe toward a large giraffe.,
+obj_swap,558836,a pizza on a plate resting on a table,a plate on a pizza resting on a table,
+obj_swap,453529,A person catching a Frisbee in the middle of a parking lot.,A Frisbee catching a person in the middle of a parking lot.,
+obj_swap,235672,a number of people holding umbrellas near one another,a number of umbrellas holding people near one another,
+rel_replace,107249,A view inside of a bathroom with a shower.,A view outside of a bathroom with a shower.,1
+rel_replace,186483,"Two cats are laying down on a covered bed, posing for the camera.","Two cats are laying down under a covered bed, posing for the camera.",0
+rel_replace,566828,The boat with large sails glides over the water.,The boat with large sails glides under the water.,1
+rel_replace,312577,The cat is sitting inside the fridge next to the milk.,The cat is sitting outside the fridge next to the milk.,1
+rel_replace,302767,A boy on skies in the water holding a fishing pole,A boy under skies in the water holding a fishing pole,0
+rel_replace,472821,Two zebras grazing on green grass under the trees.,Two zebras grazing on green grass on the trees.,1
+rel_replace,96998,Many lights are above the sink mirror near a towel rack.,Many lights are below the sink mirror near a towel rack.,0
+rel_replace,135139,Several bunches of fresh cut green bananas on ground,Several bunches of fresh cut green bananas under ground,1
+rel_replace,367048,there is a large blue and white cake on the table,there is a large blue and white cake under the table,0
+rel_replace,308083,A dog eating out of a bowl that is on a rug.,A dog eating out of a bowl that is under a rug.,1
+rel_replace,293573,A person holding a surfboard under their arm and walking into the water.,A person holding a surfboard on their arm and walking into the water.,0
+rel_replace,208640,a black cat lays over a computer keyboard on the desk,a black cat lays under a computer keyboard on the desk,1
+rel_replace,452512,The old rusted fire hydrant has a chain on the side knob.,The old rusted fire hydrant has a chain under the side knob.,0
+rel_replace,17526,A man is a couple feet above a brick walk with his skateboard.,A man is a couple feet below a brick walk with his skateboard.,1
+rel_replace,244549,A blue sky over a lush green field filled with kites.,A blue sky under a lush green field filled with kites.,1
+rel_replace,285023,A giraffe scratching his neck on a large rock.,A giraffe scratching his neck under a large rock.,0
+rel_replace,382780,A train traveling towards a tunnel under a bridge.,A train traveling towards a tunnel on a bridge.,0
+rel_replace,132668,Slices of birthday cake with candles on a lazy susan.,Slices of birthday cake with candles under a lazy susan.,1
+rel_replace,548273,Four airplanes leaving trails in the sky above power lines.,Four airplanes leaving trails in the sky below power lines.,0
+rel_replace,75122,A couple of people walking down the street under a umbrella.,A couple of people walking down the street on an umbrella.,1
+rel_replace,577278,A stack of cups and saucers on a white doily.,A stack of cups and saucers under a white doily.,
+rel_replace,339151,Cattle graze in a green valley below a hill.,Cattle graze in a green valley above a hill.,
+rel_replace,74947,A knitted ivory and red colored hat on a figurine.,A knitted ivory and red colored hat under a figurine.,
+rel_replace,484619,Woman and two children having a picnic inside a large tent.,Woman and two children having a picnic outside a large tent.,
+rel_replace,237701,Plaid shirted man tightly grips umbrella while standing inside a department store.,Plaid shirted man tightly grips umbrella while standing outside a department store.,
+rel_replace,389998,Two horses graze beside the road on the mountainside on a sunny day.,Two horses graze beside the road under the mountainside on a sunny day.,
+rel_replace,571721,"A bending driveway show grass alongside it and a bench with a Styrofoam cup, with something, possibly a sandwich on top of it, and a book, before it recedes past a gate to an area of many trees.","A bending driveway show grass alongside it and a bench with a Styrofoam cup, with something, possibly a sandwich under top of it, and a book, before it recedes past a gate to an area of many trees.",
+rel_replace,264396,An electric train passes over a stream on a bridge.,An electric train passes under a stream on a bridge.,
+rel_replace,519076,There is a lap top and a keyboard on a glass table infront of a window,There is a lap top and a keyboard under a glass table infront of a window,
+rel_replace,3899,A table has a bottle on it near a chair and a kitchen with a refrigerator and stove.,A table has a bottle under it near a chair and a kitchen with a refrigerator and stove.,
+rel_replace,556409,"The shot shows the gauges on a motorcycle closeup, and past it a second motorcycle, no rider, just a helmet on the seat, and all of it by a path in a wooded area.","The shot shows the gauges under a motorcycle closeup, and past it a second motorcycle, no rider, just a helmet on the seat, and all of it by a path in a wooded area.",
+rel_replace,230119,A room with a bed next to a window with a TV above it.,A room with a bed next to a window with a TV below it.,
+rel_replace,26304,a woman standing looking at her cell phone while two women standing under a large blossoming tree picking the flowers,a woman standing looking at her cell phone while two women standing on a large blossoming tree picking the flowers,
+rel_replace,266486,A child in pajamas is asleep on a stairway.,A child in pajamas is asleep under a stairway.,
+rel_replace,487897,Two peple with a cake that has a building on it.,Two peple with a cake that has a building under it.,
+rel_replace,20757,A cat laying under a shelf under a desk.,A cat laying under a shelf on a desk.,
+rel_replace,254411,A yellow and blue fire hydrant outside on the grass.,A yellow and blue fire hydrant outside under the grass.,
+rel_replace,364748,Three wrapped donuts and a bag on the table,Three wrapped donuts and a bag under the table,
+rel_replace,131833,A man attends to a horse outside a stable.,A man attends to a horse inside a stable.,
+rel_replace,442859,There is a ornate grandfather clock on the floor.,There is an ornate grandfather clock under the floor.,
