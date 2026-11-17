@@ -8,3 +8,15 @@ lora_baseline,lora_hn_plaus,group,3,0.1666666666666665,-1.5,1.7500000000000002,0
 lora_hn_plaus,lora_hn,text,3,-3.916666666666666,-6.666666666666667,-1.25,1.1547005383792512,test lower,0.0048,0.0396
 lora_hn_plaus,lora_hn,image,3,-0.08333333333333326,-1.4166666666666665,1.3333333333333333,0.5204164998665332,no detectable difference,0.9406,1.0
 lora_hn_plaus,lora_hn,group,3,-0.8333333333333334,-2.083333333333333,0.4166666666666667,0.2886751345948129,no detectable difference,0.2018,1.0
+lora_baseline,lora_hn_objswap,text,2,-6.375,-9.875,-2.875,0.8838834764831845,test lower,0.0004,
+lora_baseline,lora_hn_objswap,image,2,-0.75,-2.625,1.0,1.4142135623730951,no detectable difference,0.4402,
+lora_baseline,lora_hn_objswap,group,2,-1.0,-2.75,0.625,0.7071067811865476,no detectable difference,0.276,
+lora_baseline,lora_hn_relrep,text,2,-2.375,-5.125,0.25,1.5909902576697321,no detectable difference,0.0924,
+lora_baseline,lora_hn_relrep,image,2,-1.125,-3.0,0.625,0.17677669529663692,no detectable difference,0.2332,
+lora_baseline,lora_hn_relrep,group,2,-0.375,-2.0,1.25,1.590990257669732,no detectable difference,0.7192,
+lora_hn,lora_hn_objswap,text,2,-1.375,-4.0,1.25,0.5303300858899107,no detectable difference,0.3264,
+lora_hn,lora_hn_objswap,image,2,0.75,-1.125,2.625,0.3535533905932738,no detectable difference,0.4664,
+lora_hn,lora_hn_objswap,group,2,0.25,-1.5,1.875,1.0606601717798214,no detectable difference,0.8254,
+lora_hn,lora_hn_relrep,text,2,2.625,-0.375,5.625,0.1767766952966368,no detectable difference,0.093,
+lora_hn,lora_hn_relrep,image,2,0.375,-1.5,2.25,1.590990257669732,no detectable difference,0.7366,
+lora_hn,lora_hn_relrep,group,2,0.8750000000000001,-0.75,2.5,1.9445436482630059,no detectable difference,0.3344,
