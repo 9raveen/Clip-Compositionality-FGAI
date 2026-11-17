@@ -157,6 +157,8 @@ different negative files for different conditions and can be inflated by text-on
 | lora_hn_rel | 3 | 92.9 ± 0.1 | 85.1 ± 0.3 | 75.6 ± 0.6 | 68.6 ± 0.4 | 71.1 ± 0.6 | 83.5 ± 0.1 | 80.2 ± 1.1 | 79.6 ± 0.1 |
 | lora_hn_attr | 1 | 93.5 | 86.7 | 70.3 | 66.5 | 71.6 | 85.4 | 82.1 | 79.4 |
 | lora_hn_obj | 1 | 93.7 | 84.0 | 69.7 | 63.7 | 67.4 | 88.5 | 79.0 | 78.0 |
+| lora_hn_objswap | 2 | 93.0 ± 0.1 | 85.2 ± 0.5 | 69.8 ± 1.2 | 69.6 ± 2.0 | 71.0 ± 0.0 | 84.0 ± 0.2 | 83.1 ± 1.0 | 79.4 ± 0.4 |
+| lora_hn_relrep | 2 | 93.4 ± 0.1 | 83.8 ± 0.3 | 75.9 ± 0.1 | 63.9 ± 0.3 | 67.4 ± 1.1 | 84.5 ± 0.5 | 78.7 ± 0.9 | 78.2 ± 0.4 |
 
 ## SugarCrepe paired bootstrap (diff = test − ref, pp). Holm-adjusted p over the 21 pre-planned comparisons; other rows exploratory
 
@@ -183,3 +185,31 @@ different negative files for different conditions and can be inflated by text-on
 | lora_hn_plaus | lora_hn | swap_att | 3 | +0.90 | [-0.85, +2.65] | 0.60 | no detectable difference | 1.000 |
 | lora_hn_plaus | lora_hn | add_obj | 3 | -1.20 | [-1.89, -0.50] | 0.39 | test lower | 0.020 |
 | lora_hn_plaus | lora_hn | add_att | 3 | -0.43 | [-1.73, +0.87] | 1.38 | no detectable difference | 1.000 |
+| lora_baseline | lora_hn_objswap | replace_obj | 2 | -1.30 | [-2.03, -0.61] | 0.04 | test lower | exploratory |
+| lora_baseline | lora_hn_objswap | replace_att | 2 | -0.25 | [-1.90, +1.40] | 0.72 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_objswap | replace_rel | 2 | +0.68 | [-1.10, +2.42] | 1.36 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_objswap | swap_obj | 2 | +6.53 | [+0.61, +12.45] | 1.15 | test higher | exploratory |
+| lora_baseline | lora_hn_objswap | swap_att | 2 | +1.35 | [-1.20, +3.90] | 0.00 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_objswap | add_obj | 2 | -2.64 | [-3.61, -1.72] | 0.24 | test lower | exploratory |
+| lora_baseline | lora_hn_objswap | add_att | 2 | +5.20 | [+3.03, +7.37] | 1.84 | test higher | exploratory |
+| lora_baseline | lora_hn_relrep | replace_obj | 2 | -0.97 | [-1.57, -0.39] | 0.09 | test lower | exploratory |
+| lora_baseline | lora_hn_relrep | replace_att | 2 | -1.59 | [-3.11, -0.06] | 0.99 | test lower | exploratory |
+| lora_baseline | lora_hn_relrep | replace_rel | 2 | +6.76 | [+5.19, +8.36] | 0.20 | test higher | exploratory |
+| lora_baseline | lora_hn_relrep | swap_obj | 2 | +0.82 | [-3.06, +4.69] | 1.15 | no detectable difference | exploratory |
+| lora_baseline | lora_hn_relrep | swap_att | 2 | -2.25 | [-4.28, -0.23] | 1.06 | test lower | exploratory |
+| lora_baseline | lora_hn_relrep | add_obj | 2 | -2.16 | [-2.96, -1.41] | 0.93 | test lower | exploratory |
+| lora_baseline | lora_hn_relrep | add_att | 2 | +0.79 | [-1.16, +2.75] | 0.10 | no detectable difference | exploratory |
+| lora_hn | lora_hn_objswap | replace_obj | 2 | -0.51 | [-1.18, +0.15] | 0.13 | no detectable difference | exploratory |
+| lora_hn | lora_hn_objswap | replace_att | 2 | -1.52 | [-3.17, +0.13] | 0.18 | no detectable difference | exploratory |
+| lora_hn | lora_hn_objswap | replace_rel | 2 | -5.58 | [-7.15, -4.05] | 1.46 | test lower | exploratory |
+| lora_hn | lora_hn_objswap | swap_obj | 2 | +1.84 | [-1.22, +5.10] | 3.17 | no detectable difference | exploratory |
+| lora_hn | lora_hn_objswap | swap_att | 2 | -1.35 | [-3.60, +0.90] | 1.06 | no detectable difference | exploratory |
+| lora_hn | lora_hn_objswap | add_obj | 2 | -1.67 | [-2.50, -0.87] | 0.31 | test lower | exploratory |
+| lora_hn | lora_hn_objswap | add_att | 2 | +0.87 | [-0.94, +2.67] | 1.43 | no detectable difference | exploratory |
+| lora_hn | lora_hn_relrep | replace_obj | 2 | -0.18 | [-0.91, +0.51] | 0.09 | no detectable difference | exploratory |
+| lora_hn | lora_hn_relrep | replace_att | 2 | -2.86 | [-4.70, -1.08] | 0.45 | test lower | exploratory |
+| lora_hn | lora_hn_relrep | replace_rel | 2 | +0.50 | [-0.96, +1.96] | 0.30 | no detectable difference | exploratory |
+| lora_hn | lora_hn_relrep | swap_obj | 2 | -3.88 | [-9.18, +1.43] | 0.87 | no detectable difference | exploratory |
+| lora_hn | lora_hn_relrep | swap_att | 2 | -4.95 | [-7.51, -2.48] | 0.00 | test lower | exploratory |
+| lora_hn | lora_hn_relrep | add_obj | 2 | -1.19 | [-2.11, -0.27] | 0.99 | test lower | exploratory |
+| lora_hn | lora_hn_relrep | add_att | 2 | -3.54 | [-5.64, -1.45] | 0.51 | test lower | exploratory |
